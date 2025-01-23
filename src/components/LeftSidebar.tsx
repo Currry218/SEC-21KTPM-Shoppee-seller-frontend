@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
 
 const LeftSidebar = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -185,8 +186,12 @@ const LeftSidebar = () => {
           {/* Menu con */}
           {openMenu === "shopManagement" && (
             <ul className="pl-8">
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Hồ sơ Shop</li>
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Trang trí Shop</li>
+              <li className="py-2">
+                <Link to="/portal/settings/shop/profile/" className="text-sm text-gray-600 hover:text-orange-600 cursor-pointer">Hồ sơ Shop</Link>
+              </li>
+              <li className="py-2">
+                <Link to="/portal/decoration/" className="text-sm text-gray-600 hover:text-orange-600 cursor-pointer">Trang trí Shop</Link>
+              </li>
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Thiết lập Shop</li>
             </ul>
           )}

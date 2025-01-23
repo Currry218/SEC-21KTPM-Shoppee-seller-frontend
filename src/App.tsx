@@ -1,14 +1,21 @@
 import MainLayout from './layouts/MainLayout'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProfileShop  from './pages/ProfileShop';
+import DecorationShop from './pages/DecorationShop';
 
 function App() {
 
   return (
+    <BrowserRouter>
     <MainLayout>
-      <div>
-        <h1 className="text-2xl text-black font-bold mb-4">Welcome to the Main Content Area</h1>
-        <p>This is the main content of the page. You can add more components here.</p>
-      </div>
+    <Routes>
+          <Route path="/" element={<h1 className='text-black'>Trang chủ</h1>} />
+          <Route path="/portal/settings/shop/profile/" element={<ProfileShop/>} />
+          <Route path="/portal/decoration/" element={<DecorationShop/>} />
+        </Routes>
+      
     </MainLayout>
+    </BrowserRouter>
   )
 }
 
