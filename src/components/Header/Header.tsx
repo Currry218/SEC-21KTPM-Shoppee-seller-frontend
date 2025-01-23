@@ -1,12 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRightOnRectangleIcon, CogIcon, BuildingStorefrontIcon   } from "@heroicons/react/20/solid";
 
 const Header = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        dialogRef.current &&
+        !dialogRef.current.contains(event.target as Node) &&
+        isDialogOpen
+      ) {
+        setIsDialogOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isDialogOpen]);
 
   return (
     <header className="h-16 bg-white flex items-center justify-between shadow-md border-b border-gray-200 relative">
@@ -45,7 +63,9 @@ const Header = () => {
 
       {/* Dialog */}
       {isDialogOpen && (
-        <div className="absolute right-0 top-16 w-56 bg-white shadow-lg border border-gray-200 z-50">
+        <div 
+        ref={dialogRef}
+        className="absolute right-0 top-16 w-56 bg-white shadow-lg border border-gray-200 z-50">
           {/* Avatar lớn */}
           <div className="flex flex-col items-center p-4">
             <img

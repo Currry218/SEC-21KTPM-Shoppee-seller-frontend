@@ -1,14 +1,199 @@
+import { useState } from "react";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+
 const LeftSidebar = () => {
-    return (
-      <aside className="w-64 bg-gray-100 p-4 border-r border-gray-300">
-        <h2 className="text-lg font-semibold mb-4">Left Sidebar</h2>
-        <ul>
-          <li className="mb-2">Menu Item 1</li>
-          <li className="mb-2">Menu Item 2</li>
-          <li className="mb-2">Menu Item 3</li>
-        </ul>
-      </aside>
-    );
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+
+  const toggleMenu = (menu: string) => {
+    setOpenMenu(openMenu === menu ? null : menu);
   };
-  
-  export default LeftSidebar;
+
+  return (
+    <aside className="w-48 bg-white shadow-md border-r border-gray-200">
+      
+      {/* Danh sách nhóm menu */}
+      <ul className="mt-4">
+        {/* Nhóm menu: Quản lý đơn hàng */}
+        <li>
+          <div
+            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => toggleMenu("orderManagement")}
+          >
+            <div className="flex items-center">
+              <span className="text-gray-400 font-bold text-sm">Quản lý đơn hàng</span>
+            </div>
+            {openMenu === "orderManagement" ? (
+              <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+          {/* Menu con */}
+          {openMenu === "orderManagement" && (
+            <ul className="pl-8">
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tất cả</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Giao hàng loạt</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Bàn giao đơn hàng</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Đơn Trả hàng/ Hoàn tiền hoặc Đơn hủy</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Cài đặt vận chuyển</li>
+            </ul>
+          )}
+        </li>
+
+        {/* Nhóm menu: Quản lý sản phẩm */}
+        <li>
+          <div
+            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => toggleMenu("productManagement")}
+          >
+            <div className="flex items-center">
+              <span className="text-gray-400 font-bold text-sm">Quản lý sản phẩm</span>
+            </div>
+            {openMenu === "productManagement" ? (
+              <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+          {/* Menu con */}
+          {openMenu === "productManagement" && (
+            <ul className="pl-8">
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tất cả sản phẩm</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Thêm sản phẩm</li>
+            </ul>
+          )}
+        </li>
+
+        {/* Nhóm menu: Kênh Marketing */}
+        <li>
+          <div
+            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => toggleMenu("marketingChannel")}
+          >
+            <div className="flex items-center">
+              <span className="text-gray-400 font-bold text-sm">Kênh Marketing</span>
+            </div>
+            {openMenu === "marketingChannel" ? (
+              <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+          {/* Menu con */}
+          {openMenu === "marketingChannel" && (
+            <ul className="pl-8">
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Kênh Marketing</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Đấu giá rẻ vô địch</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Quảng cáo Shopee</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tăng đơn cùng KOL</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Live & Video</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Khuyến mãi của Shop</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Flash Sale của Shop</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Mã giảm giá của Shop</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Chương trình Shopee</li>
+            </ul>
+          )}
+        </li>
+
+        {/* Nhóm menu: Chăm sóc khách hàng */}
+        <li>
+          <div
+            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => toggleMenu("customerCare")}
+          >
+            <div className="flex items-center">
+              <span className="text-gray-400 font-bold text-sm">Chăm sóc khách hàng</span>
+            </div>
+            {openMenu === "customerCare" ? (
+              <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+          {/* Menu con */}
+          {openMenu === "customerCare" && (
+            <ul className="pl-8">
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Quản lý Chat</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Quản lý đánh giá</li>
+            </ul>
+          )}
+        </li>
+
+        {/* Nhóm menu: Tài chính */}
+        <li>
+          <div
+            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => toggleMenu("finance")}
+          >
+            <div className="flex items-center">
+              <span className="text-gray-400 font-bold text-sm">Tài chính</span>
+            </div>
+            {openMenu === "finance" ? (
+              <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+          {/* Menu con */}
+          {openMenu === "finance" && (
+            <ul className="pl-8">
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Doanh thu</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Số dư TK Shopee</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tài khoản ngân hàng</li>
+            </ul>
+          )}
+        </li>
+
+        {/* Nhóm menu: Dữ liệu */}
+        <li>
+          <div
+            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => toggleMenu("data")}
+          >
+            <div className="flex items-center">
+              <span className="text-gray-400 font-bold text-sm">Dữ liệu</span>
+            </div>
+            {openMenu === "data" ? (
+              <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+          {/* Menu con */}
+          {openMenu === "data" && (
+            <ul className="pl-8">
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Phân tích bán hàng</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Hiệu quả hoạt động</li>
+            </ul>
+          )}
+        </li>
+        {/* Nhóm menu: Quản lý Shop */}
+        <li>
+          <div
+            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 cursor-pointer"
+            onClick={() => toggleMenu("shopManagement")}
+          >
+            <div className="flex items-center">
+              <span className="text-gray-400 font-bold text-sm">Quản lý Shop</span>
+            </div>
+            {openMenu === "shopManagement" ? (
+              <ChevronDownIcon className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronRightIcon className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+          {/* Menu con */}
+          {openMenu === "shopManagement" && (
+            <ul className="pl-8">
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Hồ sơ Shop</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Trang trí Shop</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Thiết lập Shop</li>
+            </ul>
+          )}
+        </li>
+      </ul>
+    </aside>
+  );
+};
+
+export default LeftSidebar;
