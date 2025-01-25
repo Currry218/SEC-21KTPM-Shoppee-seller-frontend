@@ -31,7 +31,7 @@ const Header = () => {
       {/* Logo và Tiêu đề */}
       <div className="flex items-center">
         <img
-          src="../../public/logo.svg"
+          src="logo.svg"
           alt="Logo"
           className="h-20 w-20"
         />
