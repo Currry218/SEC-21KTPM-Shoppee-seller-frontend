@@ -39,7 +39,7 @@ const BusinessInformation = () => {
           </label>
           <div className="flex-grow flex items-center">
             {/* Hiển thị nội dung hoặc dấu sao */}
-            <span className="py-2 text-black text-sm flex-grow">
+            <span className="py-2 text-black text-sm">
               {isVisible
                 ? "227 Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ Chí Minh"
                 : "********"}
@@ -48,7 +48,7 @@ const BusinessInformation = () => {
             <button
               onClick={toggleVisibility}
               type="button"
-              className="p-1 text-gray-600 bg-white"
+              className="p-1 px-4 text-gray-600 bg-white"
               style={{outline: "none", border: "none", }}
             >
               {isVisible ? <Eye size={20} /> : <EyeOff size={20} />}
