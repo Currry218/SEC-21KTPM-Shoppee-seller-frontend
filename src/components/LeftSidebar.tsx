@@ -32,7 +32,9 @@ const LeftSidebar = () => {
           {/* Menu con */}
           {openMenu === "orderManagement" && (
             <ul className="pl-8">
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tất cả</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
+                <Link to="/portal/sale/order">Tất cả</Link>
+              </li>
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Giao hàng loạt</li>
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Bàn giao đơn hàng</li>
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Đơn Trả hàng/ Hoàn tiền hoặc Đơn hủy</li>
