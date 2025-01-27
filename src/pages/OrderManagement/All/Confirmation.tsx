@@ -1,4 +1,4 @@
-const AllOrderManagement = () => {
+const Confirmation = () => {
   return (
     <div className="">
       {/* Fixed Header */}
@@ -53,5 +53,4 @@ const AllOrderManagement = () => {
     </div>
   );
 };
-
-export default AllOrderManagement;
+export default Confirmation;

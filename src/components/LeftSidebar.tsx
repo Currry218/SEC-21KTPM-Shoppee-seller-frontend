@@ -11,7 +11,7 @@ const LeftSidebar = () => {
 
   return (
     <aside className="w-48 bg-white shadow-md border-r border-gray-200">
-      
+
       {/* Danh sách nhóm menu */}
       <ul className="mt-4">
         {/* Nhóm menu: Quản lý đơn hàng */}

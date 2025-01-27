@@ -2,7 +2,7 @@ import MainLayout from './layouts/MainLayout'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProfileShop from './pages/ProfileShop/ProfileShop';
 import DecorationShop from './pages/DecorationShop/DecorationShop';
-import AllOrderManagement from './pages/OrderManagement/All/AllOrderManagement';
+import All from './pages/OrderManagement/All/All';
 
 
 function App() {
@@ -16,7 +16,9 @@ function App() {
           <Route path="/portal/settings/shop/profile/:tab" element={<ProfileShop />} />
           <Route path="/portal/decoration" element={<DecorationShop />} />
           <Route path="/portal/decoration/:tab" element={<DecorationShop />} />
-          <Route path="/portal/sale/order" element={<AllOrderManagement/>} />
+          <Route path="/portal/sale/order" element={<All />} />
+          <Route path="/portal/sale/order/:type" element={<All />} />
+
 
         </Routes>
 
