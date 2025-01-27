@@ -1,7 +1,7 @@
-import Button from "../../components/common/Button";
+import OrangeButton from "../../components/common/OrangeButton";
 const HomepageDecoration = () => {
   return (
-    <Button label="Xem chi tiết" className="eds-button--normal" />
+    <OrangeButton label="Xem chi tiết" className="eds-button--normal" />
   );
 };
 

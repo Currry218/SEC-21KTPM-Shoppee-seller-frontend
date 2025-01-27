@@ -1,12 +1,12 @@
-import Button
- from "../../components/common/Button";
+import OrangeButton
+ from "../../components/common/OrangeButton";
 const CategoryDecoration = () => {
   return (
     <div className="">
       {/* Fixed Header */}
       <div className="flex justify-between items-center pb-2 mb-4 mt-2">
         <h2 className="text-lg text-black text-sm">Danh mục của Shop</h2>
-        <Button label="Thêm danh mục" className="eds-button--normal" />
+        <OrangeButton label="Thêm danh mục" className="eds-button--normal" />
       </div>
 
       {/* Table Header */}

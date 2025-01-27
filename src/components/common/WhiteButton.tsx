@@ -6,20 +6,22 @@ interface ButtonProps {
   className?: string; // Thêm class tùy chỉnh nếu cần
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, className }) => {
+const WhiteButton: React.FC<ButtonProps> = ({ label, onClick, className }) => {
   return (
     <button
       type="button"
-      className={`px-5 rounded bg-orange-600 hover:bg-orange-700 text-sm ${className}`}
+      className={`hover:border-gray-300 py-1 border border-gray-300 px-5 rounded bg-white hover:bg-gray-100 ${className}`}
       style={{
         outline: "none", 
-        border: "none", 
     }}
       onClick={onClick}
     >
-      <span>{label}</span>
+      <span 
+        className="text-black text-sm"
+      >{label}
+      </span>
     </button>
   );
 };
 
-export default Button;
+export default WhiteButton;

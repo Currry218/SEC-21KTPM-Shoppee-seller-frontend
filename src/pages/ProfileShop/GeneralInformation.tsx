@@ -1,4 +1,4 @@
-import Button from "../../components/common/Button";
+import WhiteButton from "../../components/common/WhiteButton";
 const GeneralInformation = () => {
   return (
     <div className="p-6 bg-white">
@@ -9,8 +9,8 @@ const GeneralInformation = () => {
           {/* <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
             Xem Shop của tôi
           </button> */}
-          <Button label="Xem shop của tôi" />
-          <Button label="Chỉnh sửa" />
+          <WhiteButton label="Xem shop của tôi" />
+          <WhiteButton label="Chỉnh sửa" />
         </div>
       </div>
 

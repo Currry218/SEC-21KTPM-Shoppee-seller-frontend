@@ -1,4 +1,4 @@
-import Button from "../../components/common/Button";
+import WhiteButton from "../../components/common/WhiteButton";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
@@ -16,7 +16,7 @@ const BusinessInformation = () => {
       <div className="flex justify-between items-center pb-4 mb-4">
         <h2 className="text-xl text-black">Thông tin thuế</h2>
         <div className="space-x-4">
-          <Button label="Chỉnh sửa" />
+          <WhiteButton label="Chỉnh sửa" />
         </div>
       </div>
 
