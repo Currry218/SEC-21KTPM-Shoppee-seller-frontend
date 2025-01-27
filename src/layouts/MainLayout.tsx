@@ -18,7 +18,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         <LeftSidebar />
 
         {/* Main Content Area */}
-        <main className="flex-1 bg-white p-6 overflow-auto">
+        <main className="flex-1 bg-gray-100 overflow-auto">
           {children}
         </main>
 
