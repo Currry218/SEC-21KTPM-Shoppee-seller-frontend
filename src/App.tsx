@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProfileShop from './pages/ProfileShop/ProfileShop';
 import DecorationShop from './pages/DecorationShop/DecorationShop';
 import All from './pages/OrderManagement/All/All';
-
+import AllSettings from './pages/AllSettings/AllSettings';
 
 function App() {
 
@@ -16,6 +16,7 @@ function App() {
           <Route path="/portal/settings/shop/profile/:tab" element={<ProfileShop />} />
           <Route path="/portal/decoration" element={<DecorationShop />} />
           <Route path="/portal/decoration/:tab" element={<DecorationShop />} />
+          <Route path="/portal/all-settings/:tab" element={<AllSettings />} />
           <Route path="/portal/sale/order" element={<All />} />
           <Route path="/portal/sale/order/:type" element={<All />} />
 

@@ -10,7 +10,7 @@ const WhiteButton: React.FC<ButtonProps> = ({ label, onClick, className }) => {
   return (
     <button
       type="button"
-      className={`hover:border-gray-300 py-1 border border-gray-300 px-5 rounded bg-white hover:bg-gray-100 ${className}`}
+      className={`font-normal hover:border-gray-300 py-1 border border-gray-300 px-5 rounded bg-white hover:bg-gray-100 ${className}`}
       style={{
         outline: "none", 
     }}

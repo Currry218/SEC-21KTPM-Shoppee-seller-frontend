@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import GeneralInformation from "./GeneralInformation";
-import BusinessInformation from "./BusinessInformation";
-import IdentityInformation from "./IdentityInformation";
-const ProfileShop = () => {
+import NotificationSetting from "./NotificationSetting";
+
+const AllSettings = () => {
 
   const { tab: currentTab = "general" } = useParams<{ tab: string }>(); // Lấy giá trị `tab` từ URL
   const navigate = useNavigate();
@@ -13,10 +12,15 @@ const ProfileShop = () => {
 
   // Danh sách các tab
   const tabs = [
-    { key: "general", label: "Thông tin cơ bản" },
-    { key: "business", label: "Thông tin thuế" },
-    { key: "identity-information", label: "Thông tin định danh" },
+    { key: "account", label: "Tài Khoản & Bảo Mật" },
+    { key: "shipping", label: "Cài đặt Vận Chuyển" },
+    { key: "payment", label: "Cài đặt Thanh Toán" },
+    { key: "chat", label: "Cài đặt Chat" },
+    { key: "notification", label: "Cài đặt Thông Báo" },
+    { key: "temporary-mode", label: "Chế độ Tạm Nghỉ" },
+    { key: "partner-management", label: "Nền Tảng Đối Tác (Kết Nối API)" },
   ];
+  
 
   // Cập nhật vị trí và kích thước của ink bar
   useEffect(() => {
@@ -32,7 +36,7 @@ const ProfileShop = () => {
 
   // Hàm xử lý chuyển tab
   const handleTabChange = (tab: string) => {
-    navigate(`/portal/settings/shop/profile/${tab}`); // Chuyển đổi URL
+    navigate(`/portal/all-settings/${tab}`); // Chuyển đổi URL
   };
 
   return (
@@ -47,9 +51,9 @@ const ProfileShop = () => {
               ref={(el) => (tabRefs.current[index] = el!)} // Lưu tham chiếu vào mảng
               data-key={tab.key}
               onClick={() => handleTabChange(tab.key)}
-              className={`px-4 py-2 relative bg-gray-100 ${currentTab === tab.key
+              className={`px-3.5 py-2 relative bg-gray-100 ${currentTab === tab.key
                 ? "font-bold text-orange-500"
-                : "text-black font-normal hover:text-orange-500"
+                : "font-normal text-black hover:text-orange-500"
                 }`}
               style={{
                 outline: "none", // Loại bỏ viền đen khi chọn
@@ -74,11 +78,10 @@ const ProfileShop = () => {
 
       {/* Nội dung tab */}
       <div className="m-3 bg-white p-4 rounded shadow">
-        {currentTab === "general" && <GeneralInformation />}
-        {currentTab === "business" && <BusinessInformation />}
-        {currentTab === "identity-information" && <IdentityInformation />}
+        {currentTab === "notification" && <NotificationSetting />}
+        
       </div>
     </div>
   );
 }
-export default ProfileShop;
+export default AllSettings;

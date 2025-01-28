@@ -48,7 +48,7 @@ const DecorationShop = () => {
                             onClick={() => handleTabChange(tab.key)}
                             className={`px-4 py-2 relative bg-gray-100 ${currentTab === tab.key
                                     ? "font-bold text-orange-500"
-                                    : "text-gray-600 hover:text-orange-500"
+                                    : "text-black font-normal hover:text-orange-500"
                                 }`}
                             style={{
                                 outline: "none", // Loại bỏ viền đen khi chọn

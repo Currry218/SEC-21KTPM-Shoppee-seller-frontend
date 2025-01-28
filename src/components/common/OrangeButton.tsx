@@ -10,7 +10,7 @@ const OrangeButton: React.FC<ButtonProps> = ({ label, onClick, className }) => {
   return (
     <button
       type="button"
-      className={`flex items-center px-6 py-2 rounded bg-orange-600 hover:bg-orange-700 text-sm ${className}`}
+      className={`font-normal flex items-center px-6 py-2 rounded bg-orange-600 hover:bg-orange-700 text-sm ${className}`}
       style={{
         outline: "none",
         border: "none",
