@@ -4,7 +4,7 @@ import NotificationSetting from "./NotificationSetting";
 
 const AllSettings = () => {
 
-  const { tab: currentTab = "general" } = useParams<{ tab: string }>(); // Lấy giá trị `tab` từ URL
+  const { tab: currentTab = "account" } = useParams<{ tab: string }>(); // Lấy giá trị `tab` từ URL
   const navigate = useNavigate();
 
   const [inkBarStyle, setInkBarStyle] = useState({ width: 0, left: 0 }); // Vị trí và kích thước ink bar

@@ -16,6 +16,7 @@ function App() {
           <Route path="/portal/settings/shop/profile/:tab" element={<ProfileShop />} />
           <Route path="/portal/decoration" element={<DecorationShop />} />
           <Route path="/portal/decoration/:tab" element={<DecorationShop />} />
+          <Route path="/portal/all-settings/" element={<AllSettings />} />
           <Route path="/portal/all-settings/:tab" element={<AllSettings />} />
           <Route path="/portal/sale/order" element={<All />} />
           <Route path="/portal/sale/order/:type" element={<All />} />
