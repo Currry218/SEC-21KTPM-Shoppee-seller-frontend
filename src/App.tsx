@@ -6,6 +6,8 @@ import All from './pages/OrderManagement/All/All';
 import AllSettings from './pages/AllSettings/AllSettings';
 import Revenue from './pages/Finance/Revenue';
 import Balance from './pages/Finance/Balance';
+import AllProduct from './pages/ProductManagement/AllProduct/AllProduct';
+
 function App() {
 
   return (
@@ -23,6 +25,11 @@ function App() {
           <Route path="/portal/sale/order/:type" element={<All />} />
           <Route path="/portal/finance/balance" element={<Balance />} />
           <Route path="/portal/finance/revenue" element={<Revenue />} />
+          <Route path="/portal/product/list/" element={<AllProduct />} />
+          <Route path="/portal/product/list/:type" element={<AllProduct />} />
+          <Route path="/portal/product/list/:type/:type" element={<AllProduct />} />
+
+          
         </Routes>
 
       </MainLayout>

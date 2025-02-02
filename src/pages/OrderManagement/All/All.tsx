@@ -29,7 +29,7 @@ const All = () => {
         { key: "toship", label: "Chờ lấy hàng" },
         { key: "shipping", label: "Đang giao" },
         { key: "completed", label: "Đã giao" },
-        { key: "Deleted", label: "Trả hàng/Hoàn tiền/Hủy" },
+        { key: "returnrefundcancel", label: "Trả hàng/Hoàn tiền/Hủy" },
     ];
 
     const placeholders: { [key: string]: string } = {
