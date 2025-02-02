@@ -19,6 +19,8 @@ const All = () => {
     const [startDate, setStartDate] = useState<Date | null>(new Date("2025-01-02")); // Start date state
     const [endDate, setEndDate] = useState<Date | null>(new Date("2025-02-01")); // End date state
     const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false); // History modal state
+    const [selectedType, setSelectedType] = useState("regular");
+    const [selectedStatus, setSelectedStatus] = useState("pending");
 
 
     const types = [
@@ -140,54 +142,102 @@ const All = () => {
             </div>
 
             {/* Dropdown và ô nhập text */}
-            <div className="m-3 bg-white p-4 rounded shadow flex items-center space-x-4">
-                <select
-                    className="border border-gray-100 px-4 py-2 bg-white text-black"
-                    onChange={handleSelectChange}
-                >
-                    <option value="orderId">Mã đơn hàng</option>
-                    <option value="buyerName">Tên người mua</option>
-                    <option value="product">Sản phẩm</option>
-                    <option value="trackingNumber">Mã vận đơn</option>
-                    <option value="returnRequestId">Mã yêu cầu trả hàng</option>
-                    <option value="returnTrackingNumber">Mã vận đơn cho yêu cầu trả hàng</option>
-                </select>
-                <input
-                    type="text"
-                    className="border border-gray-100 px-4 py-2 bg-white text-black"
-                    placeholder={placeholder}
-                />
-                <div className="flex items-center space-x-4">
-                    <label className="text-gray-700 text-sm font-medium">
-                        Đơn vị vận chuyển
-                    </label>
+            <div className="m-3 bg-white p-4 rounded shadow">
+                {currentType === "toship" && (
+                    <>
+                        {/* Loại đơn hàng */}
+                        <div className="flex items-center space-x-2 mb-2">
+                            <span className="text-gray-700 text-sm font-medium">Loại Đơn hàng:</span>
+                            <button
+                                className={`px-3 py-1 border rounded bg-white ${selectedType === "regular" ? "border-orange-500 text-orange-500" : "border-gray-300 text-black"
+                                    }`}
+                                onClick={() => setSelectedType("regular")}
+                            >
+                                Regular Order (0)
+                            </button>
+                            <button
+                                className={`px-3 py-1 border rounded bg-white ${selectedType === "instant" ? "border-orange-500 text-orange-500" : "border-gray-300 text-black"
+                                    }`}
+                                onClick={() => setSelectedType("instant")}
+                            >
+                                Instant (0)
+                            </button>
+                        </div>
+
+                        {/* Trạng thái đơn hàng */}
+                        <div className="flex items-center space-x-2 mb-4">
+                            <span className="text-gray-700 text-sm font-medium">Trạng thái đơn hàng:</span>
+                            <button
+                                className={`px-3 py-1 border rounded bg-white ${selectedStatus === "all" ? "border-orange-500 text-orange-500" : "border-gray-300 text-black"
+                                    }`}
+                                onClick={() => setSelectedStatus("all")}
+                            >
+                                Tất cả
+                            </button>
+                            <button
+                                className={`px-3 py-1 border rounded bg-white ${selectedStatus === "pending" ? "border-orange-500 text-orange-500" : "border-gray-300 text-black"
+                                    }`}
+                                onClick={() => setSelectedStatus("pending")}
+                            >
+                                Chưa xử lý
+                            </button>
+                            <button
+                                className={`px-3 py-1 border rounded bg-white ${selectedStatus === "processed" ? "border-orange-500 text-orange-500" : "border-gray-300 text-black"
+                                    }`}
+                                onClick={() => setSelectedStatus("processed")}
+                            >
+                                Đã xử lý
+                            </button>
+                        </div>
+                    </>
+                )}
+
+                <div className="bg-white p-4 rounded shadow flex items-center space-x-4">
                     <select
-                        className="border border-gray-300 px-4 py-2 bg-white text-black focus:border-black w-64"
+                        className="border border-gray-100 px-4 py-2 bg-white text-black"
+                        onChange={handleSelectChange}
                     >
-                        <option value="" disabled>
-                            Vui lòng chọn
-                        </option>
-                        <option value="all">Tất cả ĐVVC</option>
-                        <option value="bulky">Hàng Cồng Kềnh</option>
-                        <option value="express">Hỏa Tốc</option>
-                        <option value="fast">Nhanh</option>
-                        <option value="economy">Tiết kiệm</option>
-                        <option value="others">Others</option>
+                        <option value="orderId">Mã đơn hàng</option>
+                        <option value="buyerName">Tên người mua</option>
+                        <option value="product">Sản phẩm</option>
+                        <option value="trackingNumber">Mã vận đơn</option>
+                        <option value="returnRequestId">Mã yêu cầu trả hàng</option>
+                        <option value="returnTrackingNumber">Mã vận đơn cho yêu cầu trả hàng</option>
                     </select>
+                    <input
+                        type="text"
+                        className="border border-gray-100 px-4 py-2 bg-white text-black"
+                        placeholder={placeholder}
+                    />
+                    <div className="flex items-center space-x-4">
+                        <label className="text-gray-700 text-sm font-medium">
+                            Đơn vị vận chuyển
+                        </label>
+                        <select className="border border-gray-300 px-4 py-2 bg-white text-black focus:border-black w-64">
+                            <option value="" disabled>Vui lòng chọn</option>
+                            <option value="all">Tất cả ĐVVC</option>
+                            <option value="bulky">Hàng Cồng Kềnh</option>
+                            <option value="express">Hỏa Tốc</option>
+                            <option value="fast">Nhanh</option>
+                            <option value="economy">Tiết kiệm</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <button
+                        type="button"
+                        className="text-sm text-white bg-blue-500 px-4 py-2 border border-blue-500 hover:bg-blue-600 transition"
+                    >
+                        Áp dụng
+                    </button>
+                    <button
+                        type="button"
+                        className="text-sm text-black bg-gray-100 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition"
+                    >
+                        Đặt lại
+                    </button>
                 </div>
-                <button
-                    type="button"
-                    className="text-sm text-white bg-blue-500 px-4 py-2 border border-blue-500 hover:bg-blue-600 transition"
-                >
-                    Áp dụng
-                </button>
-                <button
-                    type="button"
-                    className="text-sm text-black bg-gray-100 px-4 py-2 border border-gray-300 hover:bg-gray-200 transition"
-                >
-                    Đặt lại
-                </button>
             </div>
+
 
             {/* Nội dung tab */}
             <div className="m-3 bg-white p-4 rounded shadow">
