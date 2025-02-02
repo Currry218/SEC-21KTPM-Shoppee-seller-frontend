@@ -5,6 +5,7 @@ import DecorationShop from './pages/DecorationShop/DecorationShop';
 import All from './pages/OrderManagement/All/All';
 import AllSettings from './pages/AllSettings/AllSettings';
 import Revenue from './pages/Finance/Revenue';
+import Balance from './pages/Finance/Balance';
 function App() {
 
   return (
@@ -20,8 +21,8 @@ function App() {
           <Route path="/portal/all-settings/:tab" element={<AllSettings />} />
           <Route path="/portal/sale/order" element={<All />} />
           <Route path="/portal/sale/order/:type" element={<All />} />
+          <Route path="/portal/finance/balance" element={<Balance />} />
           <Route path="/portal/finance/revenue" element={<Revenue />} />
-
         </Routes>
 
       </MainLayout>

@@ -140,9 +140,11 @@ const LeftSidebar = () => {
           {/* Menu con */}
           {openMenu === "finance" && (
             <ul className="pl-8">
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Doanh thu</li>
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
-                <Link to="/portal/finance/revenue">Số dư TK Shopee</Link>
+                <Link to="/portal/finance/revenue">Doanh thu</Link>
+              </li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
+                <Link to="/portal/finance/balance">Số dư TK Shopii</Link>
               </li>
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tài khoản ngân hàng</li>
             </ul>

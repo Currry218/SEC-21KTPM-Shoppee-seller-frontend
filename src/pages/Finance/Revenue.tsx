@@ -1,12 +1,18 @@
-import { useState, useRef, useEffect } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import "../../components/custom-datepicker.css";
-import { BiCreditCard } from "react-icons/bi";
 
 const Revenue = () => {
-  const [startDate, setStartDate] = useState(new Date(2025, 0, 1));
-  const [endDate, setEndDate] = useState(new Date(2025, 0, 31));
+  const [activeTab, setActiveTab] = useState<'unpaid' | 'paid'>('unpaid');
+
+  const initialStart = new Date('2025-01-27');
+  const initialEnd = new Date(initialStart);
+  initialEnd.setDate(initialStart.getDate() + 6);
+
+  const [startDate, setStartDate] = useState(initialStart);
+  const [endDate, setEndDate] = useState(initialEnd);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const datePickerRef = useRef<HTMLDivElement>(null);
 
@@ -39,195 +45,197 @@ const Revenue = () => {
   }, [showDatePicker]);
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4 text-black">Số dư TK Shopee</h1>
-      <div className="flex space-x-4 mb-4">
-        {/* Tổng quan */}
-        <div className="bg-white p-4 rounded shadow w-1/2">
-          <h2 className="text-lg font-bold mb-2 text-black">Tổng Quan</h2>
-          <div className="flex items-center mb-2">
-            <span className="text-gray-600 text-sm mr-2">Số dư</span>
-            <span className="text-black font-bold text-xl">₫0</span>
-            <button className="bg-orange-500 text-white px-4 py-2 rounded ml-4 hover:bg-orange-600">
-              Yêu Cầu Thanh Toán
-            </button>
+    <div className="p-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
+      {/* Tổng Quan and Chi Tiết */}
+      <div className="lg:col-span-2">
+        {/* Tổng Quan */}
+        <div className="bg-white p-4 rounded-lg shadow mb-4">
+          <h2 className="text-xl text-black font-bold mb-2">Tổng Quan</h2>
+          <div className="bg-blue-100 border border-blue-300 p-3 rounded-md mb-4">
+            <span className="text-blue-700 text-sm">
+              <span className="inline-block align-middle rounded-full bg-blue-300 w-2 h-2 mr-1" />
+              Các số dưới đây chưa bao gồm điều chỉnh. Vui lòng tải xuống Báo cáo
+              thu nhập để kiểm tra chi tiết các điều chỉnh liên quan.
+            </span>
           </div>
-          <div className="text-xs text-gray-500">
-            Tự động rút tiền: Tắt
+          <div className="flex justify-between items-center mb-4">
+            <div className="text-center">
+              <h3 className="text-gray-500 text-sm">Chưa thanh toán</h3>
+              <span className="text-black font-bold text-lg">₫0</span>
+            </div>
+            <div className="text-center">
+              <h3 className="text-gray-500 text-sm">Đã thanh toán</h3>
+              <span className="text-black font-bold text-lg">₫0</span>
+            </div>
+            <div className="text-center">
+              <h3 className="text-gray-500 text-sm">Tuần này</h3>
+              <span className="text-black font-bold text-lg">₫0</span>
+            </div>
+            <div className="text-center">
+              <h3 className="text-gray-500 text-sm">Tháng này</h3>
+              <span className="text-black font-bold text-lg">₫0</span>
+            </div>
+            <div className="text-center">
+              <h3 className="text-gray-500 text-sm">Tổng cộng</h3>
+              <span className="text-black font-bold text-lg">₫0</span>
+            </div>
           </div>
+          <Link
+            to="#"
+            className="text-blue-500 hover:underline text-sm"
+          >
+            Số dư TK Shopii {'>'}
+          </Link>
         </div>
 
-        {/* Tài khoản ngân hàng */}
-        <div className="bg-white p-4 rounded shadow w-1/2">
-          <h2 className="text-lg font-bold mb-2 text-black">
-            Tài khoản ngân hàng
-          </h2>
-          <div className="text-sm  flex items-center">
-            <button className="  px-2 py-1  bg-white text-black  mr-1 flex items-center">
-            <BiCreditCard className="mr-1" size={20} />
-
-              Hủy Liên kết Tài Khoản Ngân Hàng.
+        {/* Chi Tiết */}
+        <div className="bg-white p-4 rounded-lg shadow">
+          <h2 className="text-xl text-black font-bold mb-4">Chi Tiết</h2>
+          <div className="flex items-center gap-4 mb-4">
+            <button
+              onClick={() => setActiveTab('unpaid')}
+              className={`px-4 py-2 relative bg-gray-100 ${activeTab === 'unpaid'
+                ? "font-bold text-orange-500"
+                : "text-gray-600 hover:text-orange-500"
+                }`}
+              style={{ outline: "none", border: "none" }}
+            >
+              Chưa thanh toán
             </button>
-            <button className="px-2 py-1 bg-white text-blue-500 ">
-              Thêm Tài Khoản Ngân Hàng
+            <button
+              onClick={() => setActiveTab('paid')}
+              className={`px-4 py-2 relative bg-gray-100 ${activeTab === 'paid'
+                ? "font-bold text-orange-500"
+                : "text-gray-600 hover:text-orange-500"
+                }`}
+              style={{ outline: "none", border: "none" }}
+            >
+              Đã thanh toán
             </button>
+          </div>
+          <div className="flex items-center gap-2 mb-4 relative" ref={datePickerRef}>
+            <span className="text-sm bg-white text-gray-500">Tuần này:</span>
+            <button
+              type="button"
+              className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100"
+              onClick={toggleDatePicker}
+            >
+              {`${startDate.toLocaleDateString("vi-VN")} - ${endDate.toLocaleDateString("vi-VN")}`}
+            </button>
+            {showDatePicker && (
+              <div className="absolute top-10 left-0 z-10">
+                <DatePicker
+                  selected={startDate}
+                  onChange={handleDateChange}
+                  startDate={startDate}
+                  endDate={endDate}
+                  selectsRange
+                  inline
+                  calendarClassName="custom-calendar"
+                  dayClassName={() => "custom-day"}
+                  popperPlacement="bottom-start"
+                  dateFormat="dd/MM/yyyy"
+                />
+              </div>
+            )}
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full">
+              <thead>
+                <tr className="text-left text-gray-500">
+                  <th className="py-2">Đơn hàng</th>
+                  <th className="py-2">Thanh toán đã chuyển vào</th>
+                  <th className="py-2">Trạng thái</th>
+                  <th className="py-2">Phương thức thanh toán</th>
+                  <th className="py-2">Số tiền thanh toán</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colSpan={5} className="text-center py-4">
+                    <div className="flex flex-col items-center">
+                      <img
+                        src="/logo.svg"
+                        alt="No Data"
+                        className="w-16 h-16"
+                      />
+                      <span className="text-gray-500 mt-2">
+                        Không có dữ liệu
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
-      {/* Các giao dịch gần đây */}
-      <div className="bg-white p-4 rounded shadow">
-        <h2 className="text-lg font-bold mb-2 text-black">
-          Các giao dịch gần đây
-        </h2>
-        <div className="flex items-center mb-4 relative" ref={datePickerRef}>
-          <span className="text-gray-600 text-sm mr-2">
-            Thời gian phát sinh giao dịch
-          </span>
-          <button
-            className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100"
-            onClick={toggleDatePicker}
-          >
-            {`Trong vòng tháng này: ${startDate
-              .toLocaleDateString("vi-VN")
-              .split("/")
-              .map((s) => s.padStart(2, "0"))
-              .join("/")} - ${endDate
-              .toLocaleDateString("vi-VN")
-              .split("/")
-              .map((s) => s.padStart(2, "0"))
-              .join("/")}`}
-          </button>
-          {showDatePicker && (
-            <div className="absolute top-10 bg-white left-0 z-10">
-              <DatePicker
-                selected={startDate}
-                onChange={handleDateChange}
-                startDate={startDate}
-                endDate={endDate}
-                selectsRange
-                inline
-                calendarClassName="custom-calendar"
-                dayClassName={() => "custom-day"}
-                popperPlacement="bottom-start"
-                dateFormat="dd/MM/yyyy"
-              />
-            </div>
-          )}
-        </div>
-        <div className="flex items-center mb-4">
-          <span className="text-gray-600 text-sm mr-2">Dòng tiền</span>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            Tất cả
-          </button>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            Tiền vào
-          </button>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100">
-            Tiền ra
-          </button>
-        </div>
-        <div className="flex items-center mb-4">
-          <span className="text-gray-600 text-sm mr-2">Loại giao dịch</span>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            <input type="checkbox" className="mr-1" />
-            Doanh Thu Đơn Hàng
-          </button>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            <input type="checkbox" className="mr-1" />
-            Điều chỉnh
-          </button>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            <input type="checkbox" className="mr-1" />
-            Cấn trừ Số dư TK Shopee
-          </button>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            <input type="checkbox" className="mr-1" />
-            Giá trị hoàn được ghi nhận
-          </button>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            <input type="checkbox" className="mr-1" />
-            Rút Tiền
-          </button>
-          <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-1">
-            <input type="checkbox" className="mr-1" />
-            SEasy Cho Vay Người Bán
-          </button>
-          <div className="ml-auto flex items-center">
-            <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 mr-2">
-              Thiết lập lại
-            </button>
-            <button className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-red-600">
-              Áp dụng
-            </button>
+      {/* Báo cáo thu nhập */}
+      <div className="lg:col-span-1">
+        <div className="bg-white p-4 rounded-lg shadow">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-xl text-black font-bold">Báo cáo thu nhập</h2>
+            <Link
+              to="#"
+              className="text-blue-500 hover:underline text-sm"
+            >
+              Xem thêm {'>'}
+            </Link>
           </div>
-        </div>
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-gray-600 text-sm">
-            0 Giao dịch (Tổng số tiền: 0)
-          </span>
-          <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Tìm kiếm đơn hàng"
-              className="border border-gray-300 bg-white px-2 py-1 rounded text-sm text-black mr-2"
-            />
-            <button className="border border-gray-300 bg-white px-2 py-1 rounded text-sm text-black hover:bg-gray-100 mr-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-            </button>
-            <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100">
-              Xuất
-            </button>
-            <button className="border border-gray-300 px-2 py-1 rounded text-sm bg-white text-black hover:bg-gray-100 ml-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 12.75h.75v.75h-.75v-.75zM6.75 18.75h.75v.75h-.75v-.75zM12.75 6.75h.75v.75h-.75v-.75zM12.75 12.75h.75v.75h-.75v-.75zM12.75 18.75h.75v.75h-.75v-.75zM17.625 6.75h1.125v.75h-1.125v-.75zM17.625 12.75h1.125v.75h-1.125v-.75zM17.625 18.75h1.125v.75h-1.125v-.75z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-center mt-6 text-gray-500">
-          <svg
-            viewBox="0 0 97 96"
-            className="w-20 h-20 text-gray-300"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <ellipse cx="47.5" cy="87" rx="45" ry="6" fill="#F2F2F2"></ellipse>
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M79.5 55.5384V84.1647C79.5 85.1783 78.6453 86 77.5909 86H18.4091C17.3547 86 16.5 85.1783 16.5 84.1647V9.83529C16.5 8.82169 17.3547 8 18.4091 8H77.5909C78.6453 8 79.5 8.82169 79.5 9.83529V43.6505V55.5384Z"
-              fill="white"
-              stroke="#D8D8D8"
-            ></path>
-          </svg>
-          <p className="text-center text-sm text-gray-500 mt-2">
-            Không có lịch sử giao dịch
-          </p>
+          <ul className="space-y-2">
+            <li className="flex justify-between items-center">
+              <span className="text-sm text-black">20 Th01 - 26 Th01 2025</span>
+              <button className="text-blue-500 bg-white hover:underline text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8zm12 0a2 2 0 100 4 2 2 0 000-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </li>
+            <li className="flex justify-between items-center">
+              <span className="text-sm text-black">13 Th01 - 19 Th01 2025</span>
+              <button className="text-blue-500 bg-white hover:underline text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8zm12 0a2 2 0 100 4 2 2 0 000-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </li>
+            <li className="flex justify-between items-center">
+              <span className="text-sm text-black">6 Th01 - 12 Th01 2025</span>
+              <button className="text-blue-500 bg-white hover:underline text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8zm12 0a2 2 0 100 4 2 2 0 000-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
