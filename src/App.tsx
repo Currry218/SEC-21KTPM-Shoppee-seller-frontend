@@ -27,9 +27,7 @@ function App() {
           <Route path="/portal/finance/revenue" element={<Revenue />} />
           <Route path="/portal/product/list/" element={<AllProduct />} />
           <Route path="/portal/product/list/:type" element={<AllProduct />} />
-          <Route path="/portal/product/list/:type/:type" element={<AllProduct />} />
-
-          
+          <Route path="/portal/product/list/:type/:param?" element={<AllProduct />} />
         </Routes>
 
       </MainLayout>

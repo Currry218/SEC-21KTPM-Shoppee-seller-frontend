@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const All = () => {
-    const { type: currentType = "" } = useParams<{ type: string }>();
+    const { type: currentType = "toship" } = useParams<{ type: string }>();
     const navigate = useNavigate();
 
     const [inkBarStyle, setInkBarStyle] = useState({ width: 0, left: 0 }); // Vị trí và kích thước ink bar
@@ -147,7 +147,7 @@ const All = () => {
                     <>
                         {/* Loại đơn hàng */}
                         <div className="flex items-center space-x-2 mb-2">
-                            <span className="text-gray-700 text-sm font-medium">Loại Đơn hàng:</span>
+                            <span className="text-gray-700 text-sm font-medium">Loại Đơn hàng</span>
                             <button
                                 className={`px-3 py-1 border rounded bg-white ${selectedType === "regular" ? "border-orange-500 text-orange-500" : "border-gray-300 text-black"
                                     }`}
@@ -166,7 +166,7 @@ const All = () => {
 
                         {/* Trạng thái đơn hàng */}
                         <div className="flex items-center space-x-2 mb-4">
-                            <span className="text-gray-700 text-sm font-medium">Trạng thái đơn hàng:</span>
+                            <span className="text-gray-700 text-sm font-medium">Trạng thái đơn hàng</span>
                             <button
                                 className={`px-3 py-1 border rounded bg-white ${selectedStatus === "all" ? "border-orange-500 text-orange-500" : "border-gray-300 text-black"
                                     }`}
