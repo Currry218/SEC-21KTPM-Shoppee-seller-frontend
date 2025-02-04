@@ -6,6 +6,9 @@ import All from './pages/OrderManagement/All/All';
 import AllSettings from './pages/AllSettings/AllSettings';
 import Revenue from './pages/Finance/Revenue';
 import Balance from './pages/Finance/Balance';
+import BulkShipping from './pages/OrderManagement/BulkShipping/BulkShippingMain';
+import OrderDelivery from './pages/OrderManagement/OrderDelivery/OrderDeliveryMain';
+
 function App() {
 
   return (
@@ -21,10 +24,16 @@ function App() {
           <Route path="/portal/all-settings/:tab" element={<AllSettings />} />
           <Route path="/portal/sale/order" element={<All />} />
           <Route path="/portal/sale/order/:type" element={<All />} />
+
+          <Route path="/portal/sale/bulkShipping" element={<BulkShipping />} />
+          <Route path="/portal/sale/bulkShipping/:tab" element={<BulkShipping />} /> 
+
+          <Route path="/portal/sale/OrderDelivery" element={<OrderDelivery />} />
+          <Route path="/portal/sale/OrderDelivery/:tab" element={<OrderDelivery />} />
+          
           <Route path="/portal/finance/balance" element={<Balance />} />
           <Route path="/portal/finance/revenue" element={<Revenue />} />
         </Routes>
-
       </MainLayout>
     </BrowserRouter>
   )
