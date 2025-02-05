@@ -4,10 +4,10 @@ import OrangeButton from "../../../components/common/OrangeButton";
 import { Search, Edit2 } from "lucide-react";
 
 import All from "./All";
-// import Confirmation from "./Confirmation";
-// import Delivered from "./Delivered";
-// import Goods from "./Goods";
-// import InProgress from "./InProgress";
+import AllActived from "./AllActived";
+import Restock from "./Restock";
+import Pending from "./Pending";
+import Need_optimized from "./Need_optimized";
 
 const AllProduct = () => {
     const { type: currentType = "live" } = useParams<{ type: string }>();
@@ -455,10 +455,12 @@ const AllProduct = () => {
             {/* Nội dung tab */}
             <div className="m-3 bg-white p-4 rounded shadow">
                 {currentType === "all" && <All />}
-                {/* {currentType === "unpaid" && <Confirmation />}
-                {currentType === "toship" && <Goods />}
-                {currentType === "shipping" && <InProgress />}
-                {currentType === "completed" && <Delivered />} */}
+                {currentType === "live" &&  currentParam === "all" && <AllActived />}
+                {currentType === "live" &&  currentParam === "restock" && <Restock />}
+                {currentType === "live" &&  currentParam === "need_optimized" && <Need_optimized />}
+
+                {currentType === "reviewing" && <Pending />}
+                {/* {currentType === "completed" && <Delivered />} */}
             </div>
         </div>
     );
