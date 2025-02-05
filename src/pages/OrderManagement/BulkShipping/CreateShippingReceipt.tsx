@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import FilterButton from "./FilterButton";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const CreateShippingReceipt: React.FC = () => {
+  const [isFormVisible, setIsFormVisible] = useState(true); // State to toggle form visibility
   const [printType, setPrintType] = useState<'normal' | 'thermal'>('normal');
   const [fileFormat, setFileFormat] = useState<'pdf' | 'excel'>('pdf');
   const [selectedOrderType, setSelectedOrderType] = useState("Regular Order");
   const [selectedDeliveryTime, setSelectedDeliveryTime] = useState("Tất cả trạng thái");
   const [selectedCarrier, setSelectedCarrier] = useState("SPX Instant");
   const [selectedOrderStatus, setSelectedOrderStatus] = useState("Tất cả trạng thái");
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const buttonClasses = (isActive: boolean) =>
     `px-1 py-1 border rounded-full text-sm ${isActive ? "text-red-500 border-red-500 bg-red-100" : "bg-gray-200 text-black"
@@ -88,6 +94,92 @@ const CreateShippingReceipt: React.FC = () => {
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Form Section */}
+          {isFormVisible && (
+            <form className="grid grid-cols-1 gap-4 mb-1 mt-6 bg-white text-black">
+              <div className="flex items-center">
+                <label htmlFor="orderType" className="text-xs font-semibold mr-2 text-black w-1/4">
+                  Loại đơn hàng
+                </label>
+                <select
+                  id="orderType"
+                  className="border border-black rounded-lg p-2 text-xs text-black bg-white flex-1"
+                >
+                  <option value="all">Tất cả</option>
+                  <option value="regular">Regular Order</option>
+                  <option value="instant">Instant</option>
+                </select>
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="deliveryTime" className="text-xs font-semibold mr-2 text-black w-1/4">
+                  Thời gian xác nhận đặt đơn
+                </label>
+                <div className="flex-1">
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(dates: [Date | null, Date | null]) => {
+                      const [start, end] = dates;
+                      setStartDate(start);
+                      setEndDate(end);
+                    }}
+                    startDate={startDate}
+                    endDate={endDate}
+                    selectsRange
+                    dateFormat="yyyy/MM/dd"
+                    className="border border-black rounded-lg p-2 text-xs text-black bg-white w-full"
+                    placeholderText="Select a date range"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="product" className="text-xs font-semibold mr-2 text-black w-1/4">
+                  Tìm kiếm theo
+                </label>
+                <select
+                  id="product"
+                  className="border border-black rounded-lg p-2 text-xs text-black bg-white w-1/4 mr-2"
+                >
+                  <option value="product">Sản phẩm</option>
+                  <option value="buyerName">Tên người mua</option>
+                  <option value="orderCode">Mã đơn hàng</option>
+                </select>
+                <input
+                  type="text"
+                  id="product"
+                  placeholder="Input"
+                  className="border border-black rounded-lg p-2 text-xs text-black bg-white flex-1"
+                />
+              </div>
+
+              <div className="flex gap-2 mt-2">
+                <button
+                  type="submit"
+                  className="text-orange-500 border border-orange-500 bg-white px-4 py-2 rounded-lg text-xs font-medium flex-1"
+                >
+                  Áp dụng
+                </button>
+                <button
+                  type="reset"
+                  className="border border-black text-black bg-white px-4 py-2 rounded-lg text-xs font-medium flex-1"
+                >
+                  Đặt lại
+                </button>
+              </div>
+            </form>
+          )}
+          <button
+            onClick={() => setIsFormVisible(!isFormVisible)} // Toggle form visibility
+            className="text-blue-500 underline bg-transparent px-0 py-0 border-none text-xs font-medium mt-4 focus:outline-none focus:ring-0"
+          >
+            {isFormVisible ? "Rút gọn bộ lọc" : "Hiện bộ lọc"} {/* Dynamic label */}
+          </button>
+
+          <div className="mt-6 mb-4 flex justify-end">
+            <FilterButton />
           </div>
 
           {/* Table */}
