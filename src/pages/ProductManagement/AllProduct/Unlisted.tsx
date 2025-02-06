@@ -2,11 +2,7 @@ import { Package } from 'lucide-react';
 import { useState } from 'react';
 import { X } from 'lucide-react';
 
-
-const AllActived = () => {
-  const [activeView, setActiveView] = useState('list');
-  const [showHeader, setShowHeader] = useState(true);
-
+const Unlisted = () => {
   const [isTooltipVisible1, setIsTooltipVisible1] = useState(false);
   const [isTooltipVisible2, setIsTooltipVisible2] = useState(false);
   const [isTooltipVisible3, setIsTooltipVisible3] = useState(false);
@@ -40,12 +36,6 @@ const AllActived = () => {
     setIsPermanentTooltip(false);
   };
 
-
-  const handleViewChange = (view: 'list' | 'grid') => {
-    setActiveView(view);
-    setShowHeader(view === 'list');
-  };
-
   return (
     <div className="p-4">
       {/* Header */}
@@ -53,45 +43,10 @@ const AllActived = () => {
         <div className="flex items-center space-x-2">
           <h1 className="text-lg font-bold">0 Sản Phẩm</h1>
         </div>
-
-        {/* Table-item */}
-        <div className="flex border rounded-lg overflow-hidden">
-          <button
-            onClick={() => handleViewChange('list')}
-            className={`p-2 ${activeView === 'list' ? 'bg-white' : 'bg-gray-100'}`}
-            style={{ outline: 'none' }}
-          >
-            <svg data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24">
-              <g data-name="Layer 1">
-                <path
-                  d="M864 256H352a32 32 0 0 1 0-64h512a32 32 0 0 1 0 64zM864 544H352a32 32 0 0 1 0-64h512a32 32 0 0 1 0 64zM864 832H352a32 32 0 0 1 0-64h512a32 32 0 0 1 0 64z"
-                  fill={activeView === 'list' ? 'orange' : 'gray'}
-                />
-                <circle cx="176" cy="224" r="48" fill={activeView === 'list' ? 'orange' : 'gray'} />
-                <circle cx="176" cy="800" r="48" fill={activeView === 'list' ? 'orange' : 'gray'} />
-                <circle cx="176" cy="512" r="48" fill={activeView === 'list' ? 'orange' : 'gray'} />
-              </g>
-            </svg>
-          </button>
-          <button
-            onClick={() => handleViewChange('grid')}
-            className={`p-2 ${activeView === 'grid' ? 'bg-white' : 'bg-gray-100'}`}
-            style={{ outline: 'none' }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24">
-              <path
-                d="M27 15h-8c-1.1 0-2-1.2-2-2.3V5c0-1.1.9-2 2-2h8.1c1 0 1.9.9 1.9 1.9V13c0 1.1-.9 2-2 2zm0-9c0-.6-.4-1-1-1h-6c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h6.1c.6 0 .9-.4.9-1V6zm-14 9H5c-1.1 0-2-1.2-2-2.3V5c0-1.1.9-2 2-2h8.1c1 0 1.9.9 1.9 1.9V13c0 1.1-.9 2-2 2zm0-9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h6.1c.6 0 .9-.4.9-1V6zm14 23h-8c-1.1 0-2-1.2-2-2.3V19c0-1.1.9-2 2-2h8.1c1.1 0 1.9.9 1.9 1.9V27c0 1.1-.9 2-2 2zm0-9c0-.6-.4-1-1-1h-6c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h6.1c.6 0 .9-.4.9-1v-6zm-14 9H5c-1.1 0-2-1.2-2-2.3V19c0-1.1.9-2 2-2h8.1c1.1 0 1.9.9 1.9 1.9V27c0 1.1-.9 2-2 2zm0-9c0-.6-.4-1-1-1H6c-.6 0-1 .4-1 1v6c0 .6.4 1 1 1h6.1c.6 0 .9-.4.9-1v-6z"
-                fill={activeView === 'grid' ? 'orange' : 'gray'}
-              />
-            </svg>
-          </button>
-        </div>
       </div>
 
-      {/* Table */}
       <div className="border rounded-lg overflow-hidden">
         <table className="min-w-full table-auto">
-          {showHeader && (
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-4 py-2 text-left text-sm font-medium">
@@ -105,7 +60,6 @@ const AllActived = () => {
                       htmlFor="select-checkbox"
                       className="block w-4 h-4 border border-gray-300 bg-white rounded-md cursor-pointer peer-checked:bg-orange-500 peer-checked:border-orange-500 flex items-center justify-center transition duration-150"
                     >
-                      {/* SVG dấu tick */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-4 h-4 peer-checked:text-white"
@@ -327,7 +281,6 @@ const AllActived = () => {
                 </th>
               </tr>
             </thead>
-          )}
           <tbody>
             {/* Empty State */}
             <tr>
@@ -350,4 +303,4 @@ const AllActived = () => {
   );
 };
 
-export default AllActived;
+export default Unlisted;

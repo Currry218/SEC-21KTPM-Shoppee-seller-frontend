@@ -6,8 +6,14 @@ import { Search, Edit2 } from "lucide-react";
 import All from "./All";
 import AllActived from "./AllActived";
 import Restock from "./Restock";
-import Pending from "./Pending";
+import Reviewing from "./Reviewing";
 import Need_optimized from "./Need_optimized";
+import Banned from "./Banned";
+import Deboosted from "./Deboosted";
+import Deleted from "./Deleted";
+import Unlisted from "./Unlisted";
+import Draft from "./Draft";
+
 
 const AllProduct = () => {
     const { type: currentType = "live" } = useParams<{ type: string }>();
@@ -458,9 +464,12 @@ const AllProduct = () => {
                 {currentType === "live" &&  currentParam === "all" && <AllActived />}
                 {currentType === "live" &&  currentParam === "restock" && <Restock />}
                 {currentType === "live" &&  currentParam === "need_optimized" && <Need_optimized />}
-
-                {currentType === "reviewing" && <Pending />}
-                {/* {currentType === "completed" && <Delivered />} */}
+                {currentType === "violation" &&  currentParam === "banned" && <Banned />}
+                {currentType === "violation" &&  currentParam === "deboosted" && <Deboosted />}
+                {currentType === "violation" &&  currentParam === "deleted" && <Deleted />}
+                {currentType === "reviewing" && <Reviewing />}
+                {currentType === "unpublished" &&  currentParam === "unlisted" && <Unlisted />}
+                {currentType === "unpublished" &&  currentParam === "draft" && <Draft />}
             </div>
         </div>
     );
