@@ -3,12 +3,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProfileShop from './pages/ProfileShop/ProfileShop';
 import DecorationShop from './pages/DecorationShop/DecorationShop';
 import All from './pages/OrderManagement/All/All';
+import AllProduct from './pages/ProductManagement/AllProduct/AllProduct';
 import AllSettings from './pages/AllSettings/AllSettings';
 import Revenue from './pages/Finance/Revenue';
 import Balance from './pages/Finance/Balance';
 import BulkShipping from './pages/OrderManagement/BulkShipping/BulkShippingMain';
 import OrderDelivery from './pages/OrderManagement/OrderDelivery/OrderDeliveryMain';
 import OrderInteraction from './pages/OrderManagement/OrderInteraction/OrderInteractionMain';
+import MediaStorage from './pages/DecorationShop/MediaStorage/MediaStorage';
 
 function App() {
 
@@ -23,6 +25,7 @@ function App() {
           <Route path="/portal/decoration/:tab" element={<DecorationShop />} />
           <Route path="/portal/all-settings/" element={<AllSettings />} />
           <Route path="/portal/all-settings/:tab" element={<AllSettings />} />
+          <Route path="/portal/decoration/mediastore" element={<MediaStorage />} />
           <Route path="/portal/sale/order" element={<All />} />
           <Route path="/portal/sale/order/:type" element={<All />} />
 
@@ -37,6 +40,10 @@ function App() {
           
           <Route path="/portal/finance/balance" element={<Balance />} />
           <Route path="/portal/finance/revenue" element={<Revenue />} />
+          <Route path="/portal/product/list/" element={<AllProduct />} />
+          <Route path="/portal/product/list/:type" element={<AllProduct />} />
+          <Route path="/portal/product/list/:type/:param?" element={<AllProduct />} />
+          
         </Routes>
       </MainLayout>
     </BrowserRouter>

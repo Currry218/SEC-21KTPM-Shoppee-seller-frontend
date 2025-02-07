@@ -12,8 +12,8 @@ const OrderDelivery = () => {
 
   // Danh sách các tab
   const tabs = [
-    { key: "PickUpGood", label: "Chờ giao hàng" },
-    { key: "CollectGood", label: "Tạo phiếu" },
+    { key: "PickUpGood", label: "Lấy hàng" },
+    { key: "CollectGood", label: "Gửi hàng tại bưu cục" },
   ];
 
   // Cập nhật vị trí và kích thước của ink bar
@@ -35,9 +35,6 @@ const OrderDelivery = () => {
 
   return (
     <div className="p-2 pt-4">
-      <span className="px-3 py-2 text-2xl text-black">
-        Giao hàng loạt
-      </span>
       {/* Tabs với nút ở bên phải */}
       <div className="relative mb-4 flex items-center justify-between">
         {/* Tabs */}
