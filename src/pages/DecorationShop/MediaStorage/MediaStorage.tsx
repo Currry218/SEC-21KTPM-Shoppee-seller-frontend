@@ -342,7 +342,7 @@ const MediaStorage = () => {
               {/* Dung lượng với icon sort */}
               <div className="flex items-center justify-center text-sm">
                 <span className="mr-1">Dung lượng</span>
-                <div className="flex flex-col space-y-[-4px]">
+                <div className="flex flex-col space-y-[-10px]">
                   {/* Icon mũi tên lên */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +372,7 @@ const MediaStorage = () => {
               {/* Thời gian cập nhật với icon sort */}
               <div className="flex items-center justify-center text-sm">
                 <span className="mr-1">Thời gian cập nhật</span>
-                <div className="flex flex-col space-y-[-4px]">
+                <div className="flex flex-col space-y-[-10px]">
                   {/* Icon mũi tên lên */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
