@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import HomepageDecoration from "./HomepageDecoration";
 import CategoryDecoration from "./CategoryDecoration";
+import HostSaleDecoration from "./HotSaleDecoration";
 import { Link } from "react-router-dom";
 
 const DecorationShop = () => {
@@ -102,9 +103,7 @@ const DecorationShop = () => {
             <div className="m-3 bg-white p-4 rounded shadow">
                 {currentTab === "homepage" && <HomepageDecoration />}
                 {currentTab === "category" && <CategoryDecoration />}
-                {currentTab === "hotSale" && (
-                    <h2 className="text-gray-700">Nội dung của Top sản phẩm nổi bật</h2>
-                )}
+                {currentTab === "hotSale" && <HostSaleDecoration />}
             </div>
         </div>
     );
