@@ -9,7 +9,7 @@ import Revenue from './pages/Finance/Revenue';
 import Balance from './pages/Finance/Balance';
 import BulkShipping from './pages/OrderManagement/BulkShipping/BulkShippingMain';
 import OrderDelivery from './pages/OrderManagement/OrderDelivery/OrderDeliveryMain';
-
+import MediaStorage from './pages/DecorationShop/MediaStorage/MediaStorage';
 function App() {
 
   return (
@@ -23,6 +23,7 @@ function App() {
           <Route path="/portal/decoration/:tab" element={<DecorationShop />} />
           <Route path="/portal/all-settings/" element={<AllSettings />} />
           <Route path="/portal/all-settings/:tab" element={<AllSettings />} />
+          <Route path="/portal/decoration/mediastore" element={<MediaStorage />} />
           <Route path="/portal/sale/order" element={<All />} />
           <Route path="/portal/sale/order/:type" element={<All />} />
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/portal/product/list/" element={<AllProduct />} />
           <Route path="/portal/product/list/:type" element={<AllProduct />} />
           <Route path="/portal/product/list/:type/:param?" element={<AllProduct />} />
+          
         </Routes>
       </MainLayout>
     </BrowserRouter>

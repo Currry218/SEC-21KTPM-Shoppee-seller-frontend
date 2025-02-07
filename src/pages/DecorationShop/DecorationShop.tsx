@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import HomepageDecoration from "./HomepageDecoration";
 import CategoryDecoration from "./CategoryDecoration";
+import { Link } from "react-router-dom";
 
 const DecorationShop = () => {
     const { tab: currentTab = "homepage" } = useParams<{ tab: string }>(); // Lấy giá trị `tab` từ URL
@@ -47,8 +48,8 @@ const DecorationShop = () => {
                             data-key={tab.key}
                             onClick={() => handleTabChange(tab.key)}
                             className={`px-4 py-2 relative bg-gray-100 ${currentTab === tab.key
-                                    ? "font-bold text-orange-500"
-                                    : "text-black font-normal hover:text-orange-500"
+                                ? "font-bold text-orange-500"
+                                : "text-black font-normal hover:text-orange-500"
                                 }`}
                             style={{
                                 outline: "none", // Loại bỏ viền đen khi chọn
@@ -70,7 +71,8 @@ const DecorationShop = () => {
 
                 {/* Nút bên phải */}
                 <div className="flex space-x-4">
-                    <button
+                    <Link
+                        to="/portal/decoration/mediastore"
                         type="button"
                         className="group text-sm text-blue-500 bg-gray-100 px-4 py-2 flex items-center transition"
                         style={{
@@ -78,7 +80,7 @@ const DecorationShop = () => {
                             border: "none", // Loại bỏ viền mặc định
                         }}
                     >
-                        <i className="eds-icon mr-1">
+                        <i className="eds-icon mr-1"> 
                             <svg
                                 viewBox="0 0 16 16"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +92,7 @@ const DecorationShop = () => {
                         <span className="group-hover:text-blue-800 transition-colors">
                             Kho Hình Ảnh/Video
                         </span>
-                    </button>
+                    </Link>
                 </div>
             </div>
 
