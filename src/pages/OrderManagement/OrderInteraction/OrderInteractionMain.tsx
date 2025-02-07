@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { IoBookOutline } from "react-icons/io5";
-import { FiAlignJustify } from "react-icons/fi";
 
 import OrderInteractionAll from "./All";
 import { CiVolumeHigh } from "react-icons/ci";

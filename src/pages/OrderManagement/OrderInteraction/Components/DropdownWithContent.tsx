@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect } from "react";
 import { FaRegFileAlt } from "react-icons/fa";
 import { CiFileOn } from "react-icons/ci";
+import { FiAlignJustify } from "react-icons/fi";
 
 const DropdownWithContent: React.FC = () => {
     const columns = [
@@ -35,7 +36,7 @@ const DropdownWithContent: React.FC = () => {
                     onClick={toggleDropdown}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none"
                 >
-                    Open Dropdown
+                    <FiAlignJustify />
                 </button>
 
                 {isOpen && (
