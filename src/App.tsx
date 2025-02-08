@@ -9,6 +9,8 @@ import Revenue from './pages/Finance/Revenue';
 import Balance from './pages/Finance/Balance';
 import BulkShipping from './pages/OrderManagement/BulkShipping/BulkShippingMain';
 import OrderDelivery from './pages/OrderManagement/OrderDelivery/OrderDeliveryMain';
+import AddProduct from './pages/ProductManagement/AddProduct/AddProduct';
+
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
           <Route path="/portal/product/list/" element={<AllProduct />} />
           <Route path="/portal/product/list/:type" element={<AllProduct />} />
           <Route path="/portal/product/list/:type/:param?" element={<AllProduct />} />
+          <Route path="/portal/product/new" element={<AddProduct />} />
+          <Route path="/portal/product/new/:from" element={<AddProduct />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

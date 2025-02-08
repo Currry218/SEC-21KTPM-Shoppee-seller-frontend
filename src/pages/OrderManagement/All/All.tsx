@@ -24,7 +24,7 @@ const All = () => {
 
 
     const types = [
-        { key: "", label: "Tất cả" },
+        { key: "all", label: "Tất cả" },
         { key: "unpaid", label: "Chờ xác nhận" },
         { key: "toship", label: "Chờ lấy hàng" },
         { key: "shipping", label: "Đang giao" },
@@ -241,7 +241,7 @@ const All = () => {
 
             {/* Nội dung tab */}
             <div className="m-3 bg-white p-4 rounded shadow">
-                {currentType === "" && <AllOrderManagement />}
+                {currentType === "all" && <AllOrderManagement />}
                 {currentType === "unpaid" && <Confirmation />}
                 {currentType === "toship" && <Goods />}
                 {currentType === "shipping" && <InProgress />}

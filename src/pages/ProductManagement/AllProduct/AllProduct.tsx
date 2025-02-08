@@ -111,6 +111,10 @@ const AllProduct = () => {
         navigate(`/portal/product/list/${type}/${param}`);
     };
 
+    const handleClick = () => {
+        navigate('/portal/product/new');
+    };
+
     return (
         <div className="p-2 pt-4">
             {/* Hàng trên cùng với chữ Tất cả và các nút */}
@@ -144,7 +148,7 @@ const AllProduct = () => {
                     </select>
 
                     <OrangeButton
-                        className="eds-button--normal"
+                        className="eds-button--normal" onClick={handleClick}
                         label={
                             <>
                                 <svg viewBox="0 0 32 32" fill="currentColor" className="w-5 h-5 mr-2">
