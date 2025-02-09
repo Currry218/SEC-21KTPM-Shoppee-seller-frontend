@@ -7,6 +7,7 @@ import AllProduct from './pages/ProductManagement/AllProduct/AllProduct';
 import AllSettings from './pages/AllSettings/AllSettings';
 import Revenue from './pages/Finance/Revenue';
 import Balance from './pages/Finance/Balance';
+import Cards from './pages/Finance/Cards';
 import BulkShipping from './pages/OrderManagement/BulkShipping/BulkShippingMain';
 import OrderDelivery from './pages/OrderManagement/OrderDelivery/OrderDeliveryMain';
 import OrderInteraction from './pages/OrderManagement/OrderInteraction/OrderInteractionMain';
@@ -40,6 +41,8 @@ function App() {
           
           <Route path="/portal/finance/balance" element={<Balance />} />
           <Route path="/portal/finance/revenue" element={<Revenue />} />
+          <Route path="/portal/finance/cards" element={<Cards />} />
+          
           <Route path="/portal/product/list/" element={<AllProduct />} />
           <Route path="/portal/product/list/:type" element={<AllProduct />} />
           <Route path="/portal/product/list/:type/:param?" element={<AllProduct />} />

@@ -154,7 +154,9 @@ const LeftSidebar = () => {
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
                 <Link to="/portal/finance/balance">Số dư TK Shopii</Link>
               </li>
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tài khoản ngân hàng</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
+                <Link to="/portal/finance/cards">Tài Khoản Ngân Hàng</Link>
+              </li>
             </ul>
           )}
         </li>
