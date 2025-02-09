@@ -1,8 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Camera, Upload, PenLine } from 'lucide-react';
 
+// Define types for tab data
+type TabId = 'basic' | 'sales' | 'shipping' | 'other';
+type StepId = 'Image' | 'Video' | 'Name' | 'Des' | 'Add';
+
+interface Tab {
+    id: TabId;
+    label: string;
+    ref: React.RefObject<HTMLDivElement>;
+}
+
+interface Step {
+    id: StepId;
+    label: string;
+    ref: React.RefObject<HTMLDivElement>;
+}
+
 const AddProduct = () => {
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState<StepId>('Image');
+    const [activeTab, setActiveTab] = useState<TabId>('basic');
     const [productName, setProductName] = useState('');
     const [productDescription, setProductDescription] = useState('');
     const [selectedRatio, setSelectedRatio] = useState<string>("1:1");
@@ -10,15 +28,50 @@ const AddProduct = () => {
     const [hasSelectedProduct, setHasSelectedProduct] = useState<boolean>(false);
     const [hasSelectedIndustry, setHasSelectedIndustry] = useState<boolean>(false);
     const [hasSelectedDes, setHasSelectedDes] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
+
+    // Create refs for each section
+    const ImageRef = useRef<HTMLDivElement>(null);
+    const VideoRef = useRef<HTMLDivElement>(null);
+    const NameRef = useRef<HTMLDivElement>(null);
+    const DesRef = useRef<HTMLDivElement>(null);
+    const AddRef = useRef<HTMLDivElement>(null);
 
 
-    const steps = [
-        'Thêm ít nhất 3 hình ảnh',
-        'Thêm video sản phẩm',
-        'Tên sản phẩm có ít nhất 25~100 kí tự',
-        'Thêm ít nhất 100 kí tự hoặc 1 hình ảnh trong mô tả sản phẩm',
-        'Thêm thương hiệu'
+    const steps: Step[] = [
+        { id: 'Image', label: 'Thêm ít nhất 3 hình ảnh', ref: ImageRef },
+        { id: 'Video', label: 'Thêm video sản phẩm', ref: VideoRef },
+        { id: 'Name', label: 'Tên sản phẩm có ít nhất 25~100 kí tự', ref: NameRef },
+        { id: 'Des', label: 'Thêm ít nhất 100 kí tự hoặc 1 hình ảnh trong mô tả sản phẩm', ref: DesRef },
+        { id: 'Add', label: 'Thêm thương hiệu', ref: AddRef }
     ];
+
+    // Create refs for each section
+    const basicRef = useRef<HTMLDivElement>(null);
+    const salesRef = useRef<HTMLDivElement>(null);
+    const shippingRef = useRef<HTMLDivElement>(null);
+    const otherRef = useRef<HTMLDivElement>(null);
+
+    // Define tab data with proper typing
+    const tabs: Tab[] = [
+        { id: 'basic', label: 'Thông tin cơ bản', ref: basicRef },
+        { id: 'sales', label: 'Thông tin bán hàng', ref: salesRef },
+        { id: 'shipping', label: 'Vận chuyển', ref: shippingRef },
+        { id: 'other', label: 'Thông tin khác', ref: otherRef }
+    ];
+
+    const handleTabClick = (tabId: TabId) => {
+        setActiveTab(tabId);
+        const ref = tabs.find(tab => tab.id === tabId)?.ref;
+        ref?.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleStepClick = (stepId: StepId) => {
+        setActiveStep(stepId);
+        const ref = steps.find(step => step.id === stepId)?.ref;
+        ref?.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     const handleRatioChangeInf = () => {
         setHasSelected(true);
@@ -48,6 +101,44 @@ const AddProduct = () => {
         setHasSelectedDes(true);
     };
 
+    const handleCancelClick = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleConfirmClick = () => {
+        navigate('/portal/product/list/all');
+    };
+
+    useEffect(() => {
+        const handleScroll = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveTab(entry.target.id as TabId);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleScroll, { threshold: 0.5 });
+
+        tabs.forEach(tab => {
+            if (tab.ref.current) {
+                observer.observe(tab.ref.current);
+            }
+        });
+
+        return () => {
+            tabs.forEach(tab => {
+                if (tab.ref.current) {
+                    observer.unobserve(tab.ref.current);
+                }
+            });
+        };
+    }, []);
+
     return (
         <div className="flex min-h-screen px-20 gap-5 mt-6">
             {/* Sidebar */}
@@ -55,14 +146,15 @@ const AddProduct = () => {
                 id="sidebar">
                 <h2 className="text-lg font-semibold mb-4 text-black">Gợi ý điền Thông tin</h2>
                 <ul className="space-y-3 bg-white rounded-xl text-sm">
-                    {steps.map((step, index) => (
+                    {steps.map(step => (
                         <li
-                            key={step}
-                            className={`flex items-center space-x-2 cursor-pointer py-2 px-3 rounded ${activeStep === index
+                            key={step.id}
+                            onClick={() => handleStepClick(step.id)}
+                            className={`flex items-center space-x-2 cursor-pointer py-2 px-3 rounded ${activeStep === step.id
                                 ? 'bg-blue-100 text-black font-semibold'
                                 : 'text-gray-600 hover:bg-blue-100/50'
                                 }`}
-                            onClick={() => setActiveStep(index)}
+
                         >
                             {/* SVG Icon */}
                             <svg
@@ -74,7 +166,7 @@ const AddProduct = () => {
                                 <path fillRule="evenodd" d="M8,1 C11.8659932,1 15,4.13400675 15,8 C15,11.8659932 11.8659932,15 8,15 C4.13400675,15 1,11.8659932 1,8 C1,4.13400675 4.13400675,1 8,1 Z M11.1464466,5.92870864 L7.097234,9.97792125 L4.85355339,7.73424065 C4.65829124,7.5389785 4.34170876,7.5389785 4.14644661,7.73424065 C3.95118446,7.92950279 3.95118446,8.24608528 4.14644661,8.44134743 L6.7436806,11.0385814 C6.93894275,11.2338436 7.25552524,11.2338436 7.45078739,11.0385814 L11.8535534,6.63581542 C12.0488155,6.44055327 12.0488155,6.12397078 11.8535534,5.92870864 C11.6582912,5.73344649 11.3417088,5.73344649 11.1464466,5.92870864 Z"></path>
                             </svg>
 
-                            <span>{step}</span>
+                            <span>{step.label}</span>
                         </li>
                     ))}
                 </ul>
@@ -210,9 +302,9 @@ const AddProduct = () => {
                             <a href="#" className="text-blue-600">tại đây</a>
                         </p>
                         <p>
-                            • Số chứng nhận phê duyệt kiểu <br/>
-                            • Khuyến cáo - Hướng dẫn sử dụng <br/>
-                            • Thông số kỹ thuật <br/>
+                            • Số chứng nhận phê duyệt kiểu <br />
+                            • Khuyến cáo - Hướng dẫn sử dụng <br />
+                            • Thông số kỹ thuật <br />
                             • Thông tin cảnh báo
 
                         </p>
@@ -228,20 +320,25 @@ const AddProduct = () => {
 
                     {/* Horizontal Tabs */}
                     <div className="flex border-b sticky top-0 bg-white">
-                        {['Thông tin cơ bản', 'Thông tin bán hàng', 'Vận chuyển', 'Thông tin khác'].map(tab => (
+                        {tabs.map(tab => (
                             <button
-                                key={tab}
-                                className="px-6 py-3 bg-white text-black hover:text-gray-800"
+                                key={tab.id}
+                                onClick={() => handleTabClick(tab.id)}
+                                className={`px-6 py-3 bg-white hover:text-gray-800 focus:outline-none outline-none ${activeTab === tab.id
+                                    ? 'text-orange-600 border-b-2 border-orange-500 font-medium'
+                                    : 'text-black'
+                                    }`}
                             >
-                                {tab}
+                                {tab.label}
                             </button>
                         ))}
                     </div>
 
+
                     {/* All Sections Content */}
                     <div className="divide-y text-black">
                         {/* Basic Information Section */}
-                        <div className="p-6">
+                        <div id="basic" ref={basicRef} className="p-6">
                             <h2 className="text-lg font-semibold mb-4 ">Thông tin cơ bản</h2>
 
                             {/* Product Images */}
@@ -307,7 +404,7 @@ const AddProduct = () => {
                             </div>
 
                             {/* Cover Image */}
-                            <div className="mb-4" >
+                            <div ref={ImageRef} className="mb-4" >
                                 <label className="block text-sm font-medium text-gray-700 mb-2" onClick={() => handleRatioChangeInf()}>
                                     <span className="text-red-500">*</span> Ảnh bìa
                                 </label>
@@ -323,7 +420,7 @@ const AddProduct = () => {
                             </div>
 
                             {/* Product Video */}
-                            <div className="mb-4">
+                            <div ref={VideoRef} className="mb-4">
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                     Video sản phẩm
                                 </label>
@@ -341,7 +438,7 @@ const AddProduct = () => {
                             </div>
 
                             {/* Product Name */}
-                            <div className="mb-4" onClick={() => handleRatioChangePro()}>
+                            <div ref={NameRef} className="mb-4" onClick={() => handleRatioChangePro()}>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                     <span className="text-red-500">*</span> Tên sản phẩm
                                 </label>
@@ -388,7 +485,7 @@ const AddProduct = () => {
                             </div>
 
                             {/* Product Code */}
-                            <div className="mb-4" onClick={() => handleRatioChangeDes()}>
+                            <div ref={DesRef} className="mb-4" onClick={() => handleRatioChangeDes()}>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                     <span className="text-red-500">*</span> Mã sản phẩm
                                 </label>
@@ -415,7 +512,7 @@ const AddProduct = () => {
                         </div>
 
                         {/* Sales Information Section */}
-                        <div className="p-6">
+                        <div id="sales" ref={salesRef} className="p-6">
                             <h2 className="text-lg font-semibold mb-4">Thông tin bán hàng</h2>
                             <div className="p-4 bg-gray-50 rounded">
                                 <p className="text-gray-500">Có thể điều chỉnh sau khi chọn ngành hàng</p>
@@ -423,7 +520,7 @@ const AddProduct = () => {
                         </div>
 
                         {/* Shipping Section */}
-                        <div className="p-6">
+                        <div id="shipping" ref={shippingRef} className="p-6">
                             <h2 className="text-lg font-semibold mb-4">Vận chuyển</h2>
                             <div className="p-4 bg-gray-50 rounded">
                                 <p className="text-gray-500">Có thể điều chỉnh sau khi chọn ngành hàng</p>
@@ -431,7 +528,7 @@ const AddProduct = () => {
                         </div>
 
                         {/* Other Information Section */}
-                        <div className="p-6">
+                        <div id="other" ref={otherRef} className="p-6">
                             <h2 className="text-lg font-semibold mb-4">Thông tin khác</h2>
                             <div className="p-4 bg-gray-50 rounded">
                                 <p className="text-gray-500">Có thể điều chỉnh sau khi chọn ngành hàng</p>
@@ -439,10 +536,28 @@ const AddProduct = () => {
                         </div>
 
                     </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex justify-end space-x-2 p-6 bg-white border-t shadow-lg">
+                        <button className="px-4 py-2 border border-black rounded text-black bg-white" onClick={handleCancelClick}>Hủy</button>
+                        <button className="px-4 py-2 border border-black rounded text-black bg-white">Lưu & Ẩn</button>
+                        <button className="px-4 py-2 border border-black bg-orange-500 text-white rounded">Lưu & Hiển thị</button>
+                    </div>
                 </div>
             </div>
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+                    <div className="bg-white p-8 w-96 rounded shadow-lg text-black">
+                        <h2 className="text-lg font-semibold mb-4">Xác nhận</h2>
+                        <p>Hủy thay đổi?</p>
+                        <div className="flex justify-end space-x-2 mt-4">
+                            <button className="px-4 py-2 border border-black rounded text-black bg-white" onClick={handleCloseModal}>Hủy</button>
+                            <button className="px-4 py-2 border border-black bg-orange-500 text-white rounded" onClick={handleConfirmClick}>Đồng ý</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-
     );
 };
 
