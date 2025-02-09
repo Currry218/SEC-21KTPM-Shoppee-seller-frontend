@@ -41,7 +41,9 @@ const LeftSidebar = () => {
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
                 <Link to="/portal/sale/OrderDelivery/PickUpGood">Bàn giao đơn hàng</Link>
               </li>
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Đơn Trả hàng/ Hoàn tiền hoặc Đơn hủy</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
+                <Link to="/portal/sale/ReturnRefundCancel/">Đơn Trả hàng/ Hoàn tiền hoặc Đơn hủy</Link>
+              </li>
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Cài đặt vận chuyển</li>
             </ul>
           )}
@@ -154,7 +156,9 @@ const LeftSidebar = () => {
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
                 <Link to="/portal/finance/balance">Số dư TK Shopii</Link>
               </li>
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Tài khoản ngân hàng</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
+                <Link to="/portal/finance/cards">Tài Khoản Ngân Hàng</Link>
+              </li>
             </ul>
           )}
         </li>

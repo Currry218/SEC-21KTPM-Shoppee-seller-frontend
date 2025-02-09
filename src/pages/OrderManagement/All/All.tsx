@@ -53,8 +53,13 @@ const All = () => {
     }, [currentType]);
 
     const handleTypeChange = (type: string) => {
-        navigate(`/portal/sale/order/${type}`);
+        if (type === "returnrefundcancel") {
+            navigate(`/portal/sale/ReturnRefundCancel`);
+        } else {
+            navigate(`/portal/sale/order/${type}`);
+        }
     };
+    
 
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = event.target.value;
