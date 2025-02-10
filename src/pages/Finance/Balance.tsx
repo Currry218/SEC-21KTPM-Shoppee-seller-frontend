@@ -14,8 +14,6 @@ const Balance = () => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const datePickerRef = useRef<HTMLDivElement>(null);
     const [activeCashFlow, setActiveCashFlow] = useState<'all' | 'in' | 'out'>('all');
-    const typeRefs = useRef<HTMLButtonElement[]>([]);
-    const [inkBarStyle, setInkBarStyle] = useState({ width: 0, left: 0 });
     const [transactionTypes, setTransactionTypes] = useState<string[]>([]);
 
     const cashFlowTypes = [
@@ -27,23 +25,11 @@ const Balance = () => {
     const allTransactionTypes = [
         "Doanh Thu Đơn Hàng",
         "Điều chỉnh",
-        "Cấn trừ Số dư TK Shopee",
+        "Cấn trừ Số dư TK Shopii",
         "Giá trị hoàn được ghi nhận",
         "Rút Tiền",
         "SEasy Cho Vay Người Bán",
     ];
-
-
-    useEffect(() => {
-        const activeType = typeRefs.current.find(
-            (type) => type?.getAttribute("data-key") === activeCashFlow
-        );
-
-        if (activeType) {
-            const { offsetWidth, offsetLeft } = activeType;
-            setInkBarStyle({ width: offsetWidth, left: offsetLeft });
-        }
-    }, [activeCashFlow]);
 
     const handleDateChange = (dates: [Date | null, Date | null]) => {
         const [start, end] = dates;
@@ -82,25 +68,30 @@ const Balance = () => {
     };
 
     const formatDateRange = () => {
-        if (startDate && endDate) {
-          return `${startDate.toLocaleDateString("vi-VN")} - ${endDate.toLocaleDateString("vi-VN")}`;
-        }
-        return "Chọn khoảng thời gian";
-      };
-      const handleApplyFilters = () => {
+      if (startDate && endDate) {
+        return `${startDate.toLocaleDateString("vi-VN")} - ${endDate.toLocaleDateString("vi-VN")}`;
+      }
+      return "Chọn khoảng thời gian";
+    };
+
+    const handleApplyFilters = () => {
         console.log("Applying filters:", { startDate, endDate, activeCashFlow, transactionTypes });
-      };
-    
-      const handleResetFilters = () => {
+    };
+
+    const handleResetFilters = () => {
         setStartDate(null);
         setEndDate(null);
         setActiveCashFlow('all');
         setTransactionTypes([]);
-      };
+    };
+
+    const toggleAutoWithdraw = () => {
+        setAutoWithdraw(!autoWithdraw);
+    }
 
     return (
         <div className="p-4">
-            <h1 className="text-lg text-black font-bold">Số dư TK Shopee</h1>
+            <h1 className="text-lg text-black font-bold">Số dư TK Shopii</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <Card>
                     <h2 className="text-lg font-bold mb-2 text-black">Tổng Quan</h2>
@@ -115,18 +106,18 @@ const Balance = () => {
                 </Card>
 
                 <Card>
-                  <h2 className="text-lg font-bold mb-2 text-black">
-                    Tài khoản ngân hàng
-                  </h2>
-                  <div className="text-sm flex items-center">
-                    <button className="px-2 py-1 bg-white text-black mr-1 flex items-center">
-                      <BiCreditCard className="mr-1" size={20} />
-                      Hủy Liên kết Tài Khoản Ngân Hàng.
-                    </button>
-                    <button className="px-2 py-1 bg-white text-blue-500">
-                      Thêm Tài Khoản Ngân Hàng
-                    </button>
-                  </div>
+                    <h2 className="text-lg font-bold mb-2 text-black">
+                        Tài khoản ngân hàng
+                    </h2>
+                    <div className="text-sm flex items-center">
+                        <button className="px-2 py-1 bg-white text-black mr-1 flex items-center">
+                            <BiCreditCard className="mr-1" size={20} />
+                            Hủy Liên kết Tài Khoản Ngân Hàng.
+                        </button>
+                        <button className="px-2 py-1 bg-white text-blue-500">
+                            Thêm Tài Khoản Ngân Hàng
+                        </button>
+                    </div>
                 </Card>
             </div>
             <Card>
@@ -157,33 +148,27 @@ const Balance = () => {
                         </div>
                     )}
                 </div>
-                <div className="relative mb-4">
+                 {/* Cash Flow Type Buttons */}
+                <div className="flex items-center mb-4">
+                    <span className="text-gray-600 text-sm mr-2">Dòng tiền</span>
                     <div className="flex">
-                        {cashFlowTypes.map((type, index) => (
+                        {cashFlowTypes.map((type) => (
                             <button
                                 key={type.key}
-                                ref={(el) => (typeRefs.current[index] = el!)}
-                                data-key={type.key}
                                 onClick={() => setActiveCashFlow(type.key as 'all' | 'in' | 'out')}
-                                className={`px-4 py-2 relative bg-white  ${activeCashFlow === type.key
-                                    ? "font-bold text-orange-500"
-                                    : "text-gray-600 hover:text-orange-500"
-                                    }`}
+                                className={`px-4 py-1.5 rounded-full text-sm  ${
+                                    activeCashFlow === type.key
+                                        ? "bg-orange-100 text-orange-600 border border-orange-500"
+                                        : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-300"
+                                }`}
                                 style={{ outline: "none", border: "none" }}
                             >
                                 {type.label}
                             </button>
                         ))}
                     </div>
-                    {/* Ink Bar */}
-                    <div
-                        className="absolute bottom-0 h-[3px] bg-orange-500 transition-all duration-300"
-                        style={{
-                            width: inkBarStyle.width ? `${inkBarStyle.width - 20}px` : '0px',
-                            left: inkBarStyle.left ? `${inkBarStyle.left + 10}px` : '0px',
-                        }}
-                    />
                 </div>
+
 
                 <div className="flex items-center mb-4 flex-wrap">
                     <span className="text-gray-600 text-sm mr-2">Loại giao dịch</span>
@@ -201,7 +186,7 @@ const Balance = () => {
 
                     <div className="ml-auto flex items-center mt-2 md:mt-0">
                         <WhiteButton label="Thiết lập lại" onClick={handleResetFilters} className="mr-2 text-sm" />
-                         <OrangeButton label="Áp dụng" onClick={handleApplyFilters} className="text-sm" />
+                        <OrangeButton label="Áp dụng" onClick={handleApplyFilters} className="text-sm" />
                     </div>
                 </div>
 
@@ -234,7 +219,7 @@ const Balance = () => {
 
                     </div>
                 </div>
-                
+
                 <div className="flex flex-col items-center justify-center mt-6 text-gray-500">
                     <svg
                         viewBox="0 0 97 96"

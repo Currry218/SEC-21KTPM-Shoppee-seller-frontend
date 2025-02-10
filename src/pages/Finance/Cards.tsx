@@ -229,7 +229,7 @@ const Cards = () => {
                     className="h-4 w-4 text-orange-600 focus:ring-orange-500 bg-white rounded"
                 />
                 <label htmlFor="defaultAccount" className="ml-2 block text-sm bg-white text-gray-900">
-                    Set as default bank account
+                    Đặt là tài khoản mặc định
                 </label>
                 </div>
                 <div className="flex justify-end gap-4 mt-4">
