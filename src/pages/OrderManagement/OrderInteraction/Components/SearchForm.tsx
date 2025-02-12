@@ -16,15 +16,15 @@ const SearchForm: React.FC<SearchFormProps> = ({ excludeFields = [] }) => {
     const excludedKeys = Array.isArray(excludeFields) ? excludeFields : [excludeFields];
 
     const inputFields = [
-        { key: "searchRequest", label: "Tìm yêu cầu", placeholder: "Điền Mã yêu cầu..." },
-        { key: "operation", label: "Toàn bộ thao tác", placeholder: "Vui lòng chọn" },
-        { key: "status", label: "Trạng thái", placeholder: "Vui lòng chọn" },
-        { key: "deliveryDirection", label: "Vận chuyển chiều giao hàng", placeholder: "Vui lòng chọn" },
-        { key: "returnDirection", label: "Vận chuyển chiều hoàn hàng", placeholder: "Vui lòng chọn" },
-        { key: "reason", label: "Lý do", placeholder: "Vui lòng chọn" },
-        { key: "buyerPlan", label: "Phương án cho Người mua", placeholder: "Vui lòng chọn" },
-        { key: "compensation", label: "Khiếu nại được đền bù", placeholder: "Vui lòng chọn" },
-        { key: "refundEstimation", label: "Dự kiến hoàn tiền", placeholder: "Số tiền hoàn tối thiểu - tối đa" },
+        { key: "searchRequest", label: "Tìm yêu cầu", placeholder: "Điền Mã yêu cầu...", type: "text" },
+        { key: "operation", label: "Toàn bộ thao tác", placeholder: "Vui lòng chọn", type: "dropdown" },
+        { key: "status", label: "Trạng thái", placeholder: "Vui lòng chọn", type: "dropdown" },
+        { key: "deliveryDirection", label: "Vận chuyển chiều giao hàng", placeholder: "Vui lòng chọn", type: "dropdown" },
+        { key: "returnDirection", label: "Vận chuyển chiều hoàn hàng", placeholder: "Vui lòng chọn", type: "dropdown" },
+        { key: "reason", label: "Lý do", placeholder: "Vui lòng chọn", type: "dropdown" },
+        { key: "buyerPlan", label: "Phương án cho Người mua", placeholder: "Vui lòng chọn", type: "dropdown" },
+        { key: "compensation", label: "Khiếu nại được đền bù", placeholder: "Vui lòng chọn", type: "dropdown" },
+        { key: "refundEstimation", label: "Dự kiến hoàn tiền", placeholder: "Số tiền hoàn tối thiểu - tối đa", type: "range" },
     ];
 
     // Filter out fields that are in the excludeFields list
@@ -36,11 +36,18 @@ const SearchForm: React.FC<SearchFormProps> = ({ excludeFields = [] }) => {
                 {remainingFields.slice(0, 2).map((item, index) => (
                     <div key={index} className="flex items-center">
                         <label className="text-sm text-gray-700 mr-2 min-w-max">{item.label}</label>
-                        <input
-                            type="text"
-                            placeholder={item.placeholder}
-                            className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1"
-                        />
+                        {item.type === "text" ? (
+                            <input
+                                type="text"
+                                placeholder={item.placeholder}
+                                className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1"
+                            />
+                        ) : (
+                            <select className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1">
+                                <option value="">{item.placeholder}</option>
+                                {/* Add options here */}
+                            </select>
+                        )}
                     </div>
                 ))}
             </div>
@@ -52,15 +59,36 @@ const SearchForm: React.FC<SearchFormProps> = ({ excludeFields = [] }) => {
                     {remainingFields.slice(2).map((item, index) => (
                         <div key={index} className="flex items-center">
                             <label className="text-sm text-gray-700 mr-2 min-w-max">{item.label}</label>
-                            <input
-                                type="text"
-                                placeholder={item.placeholder}
-                                className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1"
-                            />
+                            {item.type === "text" ? (
+                                <input
+                                    type="text"
+                                    placeholder={item.placeholder}
+                                    className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1"
+                                />
+                            ) : item.type === "range" ? (
+                                <div className="flex items-center flex-1">
+                                    <input
+                                        type="text"
+                                        placeholder="Số tiền hoàn tối thiểu"
+                                        className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1"
+                                    />
+                                    <span className="mx-2 text-black">-</span>
+                                    <input
+                                        type="text"
+                                        placeholder="Số tiền hoàn tối đa"
+                                        className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1"
+                                    />
+                                </div>
+                            ) : (
+                                <select className="p-2 border rounded-lg text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-300 flex-1">
+                                    <option value="">{item.placeholder}</option>
+                                    {/* Add options here */}
+                                </select>
+                            )}
                         </div>
                     ))}
 
-                    {/* Putting this seperately because it has a DatePicker */}
+                    {/* Putting this separately because it has a DatePicker */}
                     {/* Ngày yêu cầu (Date Range Picker) */}
                     {!excludedKeys.includes("dateRange") && (
                         <div className="flex items-center">

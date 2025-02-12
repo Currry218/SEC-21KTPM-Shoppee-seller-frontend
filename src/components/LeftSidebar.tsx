@@ -44,7 +44,9 @@ const LeftSidebar = () => {
               <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
                 <Link to="/portal/sale/ReturnRefundCancel/">Đơn Trả hàng/ Hoàn tiền hoặc Đơn hủy</Link>
               </li>
-              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">Cài đặt vận chuyển</li>
+              <li className="py-2 text-gray-800 text-sm hover:text-orange-600 cursor-pointer">
+                <Link to="/portal/sale/DeliverySetting/">Cài đặt vận chuyển</Link>
+              </li>
             </ul>
           )}
         </li>

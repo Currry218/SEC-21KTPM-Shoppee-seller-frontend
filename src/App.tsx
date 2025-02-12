@@ -13,6 +13,7 @@ import BulkShipping from './pages/OrderManagement/BulkShipping/BulkShippingMain'
 import OrderDelivery from './pages/OrderManagement/OrderDelivery/OrderDeliveryMain';
 import OrderInteraction from './pages/OrderManagement/OrderInteraction/OrderInteractionMain';
 import MediaStorage from './pages/DecorationShop/MediaStorage/MediaStorage';
+import DeliverySetting from "./pages/OrderManagement/DeliverySetting/DeliverySettingMain";
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
 
           <Route path="/portal/sale/ReturnRefundCancel" element={<OrderInteraction />} />
           <Route path="/portal/sale/ReturnRefundCancel/:tab" element={<OrderInteraction />} />
+
+          <Route path="/portal/sale/DeliverySetting" element={<DeliverySetting />} />
+          <Route path="/portal/sale/DeliverySetting/:tab" element={<DeliverySetting />} />
           
           <Route path="/portal/finance/balance" element={<Balance />} />
           <Route path="/portal/finance/revenue" element={<Revenue />} />
