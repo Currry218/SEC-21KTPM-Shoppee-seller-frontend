@@ -22,6 +22,13 @@ const APISetting = () => {
         "Bỏ liên kết"
     ];
 
+    const description = [
+        "Đây là những đối tác mà Shop bạn đã cho phép liên kết",
+        "Here are the valid partners you have authorized, but the permissions for shop authorization and api calls have been suspended.",
+        "Vui lòng liên hệ với những đối tác mà Shop bạn muốn gia hạn thời gian liên kết.",
+        "Vui lòng liên hệ những đối tác mà Shop bạn muốn liên kết lại",
+    ]
+
     return (
         <div className="bg-white p-3 space-y-3">
             <div className="relative">
@@ -56,12 +63,38 @@ const APISetting = () => {
             </div>
 
             <div className="bg-white space-y-2">
-                <p className="text-gray-600">Đây là những đối tác mà Shop bạn đã cho phép liên kết</p>
+                <p className="text-gray-600">{description[tabs.indexOf(activeTab)]}</p>
                 <div className="grid grid-cols-4 gap-7 items-center text-gray-700 border-b py-2 bg-gray-100 text-sm rounded">
-                    <div className="col-span-1 flex justify-start pl-2">Ứng dụng</div>
-                    <div className="col-span-1 flex justify-center">Developer Name</div>
-                    <div className="col-span-1 flex justify-center">Ngày hết hạn</div>
-                    <div className="col-span-1 flex justify-center">Hoạt động</div>
+                    {activeTab === "Đang sử dụng" && (
+                        <>
+                            <div className="col-span-1 flex justify-start pl-2">Ứng dụng</div>
+                            <div className="col-span-1 flex justify-start">Developer Name</div>
+                            <div className="col-span-1 flex justify-end">Ngày hết hạn</div>
+                            <div className="col-span-1 flex justify-center">Hoạt động</div>
+                        </>
+                    )}
+                    {activeTab === "Frozen" && (
+                        <>
+                            <div className="col-span-1 flex justify-start pl-2">Ứng dụng</div>
+                            <div className="col-span-1 flex justify-start">Developer Name</div>
+                            <div className="col-span-1 flex justify-end">Ngày hết hạn</div>
+                            <div className="col-span-1 flex justify-center">Hoạt động</div>
+                        </>
+                    )}
+                    {activeTab === "Hết hạn" && (
+                        <>
+                            <div className="col-span-1 flex justify-start pl-2">Ứng dụng</div>
+                            <div className="col-span-1 flex justify-start">Developer Name</div>
+                            <div className="col-span-1 flex justify-end">Ngày hết hạn</div>
+                        </>
+                    )}
+                    {activeTab === "Bỏ liên kết" && (
+                        <>
+                            <div className="col-span-1 flex justify-start pl-2">Ứng dụng</div>
+                            <div className="col-span-1 flex justify-start">Developer Name</div>
+                            <div className="col-span-2 flex justify-center">Ngày ngưng liên kết</div>
+                        </>
+                    )}
                 </div>
 
                 <div className="flex justify-center items-center h-full">
